@@ -8,6 +8,8 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import { store } from './store'
 import * as VueGoogleMaps from 'vue2-google-maps'
+import Vuefire from 'vuefire'
+import firebase from './service/firebase'
 
 Vue.use(BootstrapVue)
 Vue.use(VueGoogleMaps, {
@@ -16,6 +18,7 @@ Vue.use(VueGoogleMaps, {
 		libraries: 'places'
 	}
 })
+Vue.use(Vuefire)
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
