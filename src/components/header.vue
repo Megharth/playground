@@ -6,6 +6,7 @@
       <b-collapse is-nav id="nav_collapse">
         <b-navbar-nav class="ml-auto" v-if="currentUser.login" >
           <b-nav-item to="/camera">Camera</b-nav-item>
+          <b-nav-item to="/gallery">Gallery</b-nav-item>
           <b-nav-item to="/location">Your Location</b-nav-item>
           <b-nav-item @click="signOut">sign out</b-nav-item>
         </b-navbar-nav>

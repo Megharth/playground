@@ -4,6 +4,7 @@ import Home from '../components/home'
 import SignIn from '../components/signin'
 import Location from '../components/location'
 import Camera from '../components/camera'
+import Gallery from '../components/gallery'
 
 Vue.use(Router)
 
@@ -24,6 +25,10 @@ export default new Router({
     {
       path: '/camera',
       component: Camera
+    },
+    {
+      path: '/gallery',
+      component: Gallery
     }
   ]
 })

@@ -11,7 +11,7 @@
 import Header from './header'
 import { storage } from '../service/firebase'
 
-	export default{
+export default{
 		components: {
 			'app-header': Header
 		},
@@ -25,7 +25,7 @@ import { storage } from '../service/firebase'
         const mediaStreamTrack = this.mediaStream.getVideoTracks()[0];
         const imageCapture = new ImageCapture(mediaStreamTrack);
         return imageCapture.takePhoto().then(blob => {
-          storage.ref().child('images/img-${new Date().getTime()}').put(blob).then(res => {
+          storage.ref().child('images/img-' + new Date().getTime()).put(blob).then(res => {
             console.log(res)
           })
         })
