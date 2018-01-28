@@ -10,6 +10,7 @@
 <script>
 import Header from './header'
 import { storage } from '../service/firebase'
+import { database } from '../service/firebase'
 
 export default{
 		components: {
@@ -25,8 +26,12 @@ export default{
         const mediaStreamTrack = this.mediaStream.getVideoTracks()[0];
         const imageCapture = new ImageCapture(mediaStreamTrack);
         return imageCapture.takePhoto().then(blob => {
-          storage.ref().child('images/img-' + new Date().getTime()).put(blob).then(res => {
-            console.log(res)
+          var imgName = 'img-' + new Date().getTime();
+          storage.ref('images/').child(imgName).put(blob).then(res => {
+            database.ref('images/').set({
+              img: imgName,
+              imgURL: res.metadata.downloadURLs[0]
+            })
           })
         })
       }

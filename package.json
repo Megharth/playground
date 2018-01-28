@@ -4,7 +4,6 @@
   "description": "A Vue.js project",
   "author": "Megharth <m.c.lakhatarai@gmial.com>",
   "private": true,
-  "homepage": "https://github.com/megharth/playground",
   "scripts": {
     "dev": "node build/dev-server.js",
     "start": "node build/dev-server.js",
