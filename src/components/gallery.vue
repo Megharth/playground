@@ -10,14 +10,15 @@
 <script>
 import Header from './header'
 import { storage } from '../service/firebase'
+import { database} from '../service/firebase'
 
 export default {
   components: {
     'app-header': Header
   },
   mounted() {
-    storage.ref().child('images/').getDownloadURL().then(url => {
-      console.log(url);
+    database.ref('images/').once('value').then(snapshot => {
+      console.log(snapshot.val());
     })
   }
 }

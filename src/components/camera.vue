@@ -28,7 +28,7 @@ export default{
         return imageCapture.takePhoto().then(blob => {
           var imgName = 'img-' + new Date().getTime();
           storage.ref('images/').child(imgName).put(blob).then(res => {
-            database.ref('images/').set({
+            database.ref('images/' + imgName + '/').set({
               img: imgName,
               imgURL: res.metadata.downloadURLs[0]
             })
