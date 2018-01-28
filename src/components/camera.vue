@@ -4,7 +4,9 @@
 		<div>
       <video ref="video" class="container d-block mx-auto"></video>
 		</div>
-    <b-button @click="capture" variant="primary" class="d-block mx-auto">Capture</b-button>
+      <b-button @click="capture" variant="primary" class="d-block mx-auto">Capture</b-button>
+      <b-button @click="flip" variant="primary" class="d-block mx-auto">Flip camera</b-button>
+
 	</div>
 </template>
 <script>
@@ -18,10 +20,23 @@ export default{
 		},
     data(){
 		  return {
-		    mediaStream: null
+		    mediaStream: null,
+        front: false
       }
     },
     methods: {
+      flip() {
+        this.front = !this.front;
+        console.log(this.front);
+        navigator.mediaDevices.getUserMedia({ video: {
+          width: 1280,
+          height: 720,
+          facingMode: (this.front ? "user" : "environment")}}).then((mediaStream) => {
+          this.mediaStream = mediaStream;
+          this.$refs.video.srcObject = mediaStream;
+          this.$refs.video.play();
+        }).catch(error => console.error('getUserMedia() error:', error))
+      },
 		  capture() {
         const mediaStreamTrack = this.mediaStream.getVideoTracks()[0];
         const imageCapture = new ImageCapture(mediaStreamTrack);
@@ -37,13 +52,15 @@ export default{
       }
     },
 		mounted () {
-	      navigator.mediaDevices.getUserMedia({ video: true })
-	        .then((mediaStream) => {
+
+	      navigator.mediaDevices.getUserMedia({ video: {
+	        width: 1280,
+          height: 720,
+	        facingMode: "environment"}}).then((mediaStream) => {
             this.mediaStream = mediaStream;
             this.$refs.video.srcObject = mediaStream;
             this.$refs.video.play();
-	        })
-	        .catch(error => console.error('getUserMedia() error:', error))
+	        }).catch(error => console.error('getUserMedia() error:', error))
 	    },
     destroyed () {
       const tracks = this.mediaStream.getTracks();
@@ -52,6 +69,9 @@ export default{
 	}
 </script>
 <style scoped>
+.btn{
+  margin-bottom: 5px;
+}
 .container{
   height: 400px;
   margin-bottom: 20px;
