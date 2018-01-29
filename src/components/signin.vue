@@ -18,6 +18,9 @@
 </template>
 <script>
 import Header from './header'
+import { auth } from '../service/firebase'
+import { persistence } from '../service/firebase'
+
 	export default{
 		components: {
 			'app-header': Header
@@ -27,30 +30,27 @@ import Header from './header'
 				user: {
 					email: '',
 					password: '',
+          name: ''
 				}
 			}
 		},
 		methods: {
-			signIn: function() {
-				this.$store.commit("login", this.user);
-				localStorage.email = this.user.email;
-				localStorage.password = this.user.password;
-				this.$router.push("home");
-			}
-		},
-		mounted() {
-			if(localStorage.email && localStorage.password){
-				this.$store.commit("login", {
-					email: localStorage.email,
-					password: localStorage.password
-				});
-				this.$router.push('home');
-			}
+      signIn: function() {
+        var self = this;
+        auth.setPersistence(persistence).then(function() {
+          auth.signInWithEmailAndPassword(self.user.email, self.user.password).then(function() {
+            var user = auth.currentUser;
+            self.user.name = user.displayName;
+            self.$store.commit("login", self.user);
+            self.$router.push("home");
+          })
+        })
+      }
 		}
 	}
 </script>
 <style scoped>
 	.form{
-		max-width: 600px 
+		max-width: 600px
 	}
 </style>

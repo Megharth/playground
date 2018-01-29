@@ -12,7 +12,11 @@ firebase.initializeApp(config);
 
 const database =  firebase.database();
 const storage = firebase.storage();
+const auth = firebase.auth();
+const persistence = firebase.auth.Auth.Persistence.LOCAL;
 export {
   database,
-  storage
+  storage,
+  auth,
+  persistence
 }

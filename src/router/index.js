@@ -5,6 +5,7 @@ import SignIn from '../components/signin'
 import Location from '../components/location'
 import Camera from '../components/camera'
 import Gallery from '../components/gallery'
+import SignUp from '../components/signup'
 
 Vue.use(Router)
 
@@ -14,6 +15,10 @@ export default new Router({
   		path: '/',
   		component: SignIn
   	},
+    {
+      path: '/signup',
+      component: SignUp
+    },
     {
     	path: '/home',
     	component: Home
