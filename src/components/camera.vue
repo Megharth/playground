@@ -52,7 +52,6 @@ export default{
       }
     },
 		mounted () {
-
 	      navigator.mediaDevices.getUserMedia({ video: {
 	        width: 1280,
           height: 720,
