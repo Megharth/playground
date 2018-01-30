@@ -11,6 +11,7 @@
 						<b-form-input type="password" v-model="user.password" placeholder="Enter Password"></b-form-input>
 					</b-form-group>
 					<b-button class="mx-auto d-block" @click="signIn">Submit</b-button>
+          <b-alert show v-if="error" variant="danger">{{ error.message }}</b-alert>
 				</div>
 			</b-card>
 		</div>
@@ -31,7 +32,8 @@ import { persistence } from '../service/firebase'
 					email: '',
 					password: '',
           name: ''
-				}
+				},
+        error: null
 			}
 		},
 		methods: {
@@ -43,6 +45,8 @@ import { persistence } from '../service/firebase'
             self.user.name = user.displayName;
             self.$store.commit("login", self.user);
             self.$router.push("home");
+          }).catch(error => {
+            self.error = error;
           })
         })
       }
@@ -53,4 +57,8 @@ import { persistence } from '../service/firebase'
 	.form{
 		max-width: 600px
 	}
+  .alert{
+    margin-top: 10px;
+    text-align: center;
+  }
 </style>

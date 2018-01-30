@@ -14,6 +14,7 @@
             <b-form-input type="password" v-model="user.password" placeholder="Enter Password"></b-form-input>
           </b-form-group>
           <b-button class="mx-auto d-block" @click="signUp">Submit</b-button>
+          <b-alert show v-if="error" variant="danger">{{ error.message }}</b-alert>
         </div>
       </b-card>
     </div>
@@ -35,7 +36,8 @@ export default{
         email: '',
         password: '',
         name: ''
-      }
+      },
+      error: null
     }
   },
   methods: {
@@ -50,7 +52,7 @@ export default{
           self.$router.push("home");
         })
       }).catch(error => {
-        console.log(error);
+        self.error = error;
       })
     }
   }
@@ -59,5 +61,9 @@ export default{
 <style scoped>
   .form{
     max-width: 600px
+  }
+  .alert{
+    margin-top: 10px;
+    text-align: center;
   }
 </style>

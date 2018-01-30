@@ -19,7 +19,8 @@ import Header from './header'
 				position: {
 					lat: 0,
 					lng: 0
-				}
+				},
+        user: null
 			}
 		},
 		mounted() {
@@ -30,6 +31,12 @@ import Header from './header'
 					self.position.lng = position.coords.longitude;
 				})
 			}
+      auth.onAuthStateChanged(user => {
+        if(user)
+          this.user = user;
+        else
+          this.$router.push("/")
+      });
 		}
 	}
 </script>
