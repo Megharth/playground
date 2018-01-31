@@ -48,8 +48,5 @@
 
     box-shadow: 0 0 2px 2px #cccccc;
   }
-  .date {
-    right: 10px;
-    position: absolute;
-  }
+
 </style>
